@@ -1,15 +1,32 @@
 import React,{useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {UserAuth} from '../context/AuthContext'
+import parse from 'html-react-parser';
+
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
   const {signUp} = UserAuth()
   const navigate = useNavigate()
+
+  const CheckPassword = (pass) =>{ 
+    const decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    if(pass.match(decimal)){ 
+      return true;
+    }else{ 
+      return false;
+    }
+  } 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
+      if(!CheckPassword(password)){
+        return setMessage(`Please ensure password is: <ul className='pl-3 font-semibold'> <li>8 characters long </li><li> contains at least one lowercase letter </li><li> one uppercase letter </li><li> one numeric digit</li> <li> one special character </li></ul> `)
+      }
+      
       await signUp(email, password)
       navigate('/home')
     } catch (error) {
@@ -31,6 +48,9 @@ const Signup = () => {
             <div className='max-w-[450px] h-[600px] mx-auto bg-black/75 text-white'>
               <div className='max-w-[320px] mx-auto py-16'>
                   <h1 className='text-3xl font-bold'>Sign Up</h1>
+                  {message && (<div className='bg-red-400 text-white text-[16px] p-3 mt-2'>
+                        {parse(message)}
+                  </div>)}
                   <form onSubmit={handleSubmit} className='w-full flex flex-col py-4'>
                     <input 
                     onChange={(e) => setEmail(e.target.value)}
