@@ -86,7 +86,7 @@ const Landing = () => {
             <p className='text-xl md:text-2xl w-[80%] md:w-[70%] mx-auto md:m-0 mt-3 '>Send kids on adventures with their favorite characters in a space made just for them—free with your membership.</p>
             </div> 
         </div>
-        <div className='grid mb-4 md:mb-0 md:grid-cols-2 text-white w-full border-t-4 border-gray-600'>
+        <div className='grid mb-4 md:mb-0 md:grid-cols-2 mx-auto text-white w-full border-t-4 border-gray-600'>
            <div className='flex flex-col justify-center mt-3 mx-auto md:mt-0 text-center md:text-left '>
             <h1 className='text-2xl md:text-5xl font-bold '>Have an Android Phone? Get our new free plan!.</h1>
             <p className='text-xl md:text-2xl w-[80%] md:w-[70%] mt-3 text-center mx-auto md:m-0'>Watch a selection of new movies and TV shows without adding any payment details!</p>
